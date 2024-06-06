@@ -1,0 +1,29 @@
+#container {
+    overflow: auto;
+    padding: 20px;
+    // background-color: #e9ffea;
+}
+
+
+ion-menu-button {
+    color: var(--ion-color-primary);
+  }
+  
+
+ion-toolbar {
+    display: inline-block;
+}
+
+
+ion-card {
+    --ion-background-color: #e9ffea;
+    min-width: 50px;
+    text-align: center;
+
+}
+
+ion-card-title {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}

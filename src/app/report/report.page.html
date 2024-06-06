@@ -1,0 +1,49 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+      <ion-title slot="start">Reportes</ion-title>
+    <!--(ionInput)="handleInput($event)"     //para capturar letra por letra -->
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title size="large" slot="start">Reportes</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <div id="container">
+    <ion-grid>
+      <ion-row>
+        <ion-card *ngFor="let item of reports; index as i">
+          <ion-icon name="person-circle-outline" slot="start" ></ion-icon>
+          <ion-card-header>
+            <ion-card-title>{{item.title}}</ion-card-title>
+            <ion-card-subtitle color="dark">{{item.subtitle}}</ion-card-subtitle>
+          </ion-card-header>
+        
+          <ion-card-content>
+            <ion-label>{{item.content}}</ion-label><br>
+            <ion-button fill="clear" (click)="updaterpt(i)" ><ion-icon slot="icon-only" name="refresh-outline"></ion-icon></ion-button>
+            <ion-button fill="clear" (click)="rptaction(i,accindex)" *ngFor="let acc of item.actions; index as accindex">
+              <ion-icon slot="icon-only" [name]="acc.icon">
+            </ion-icon></ion-button>
+          </ion-card-content>
+        
+          
+        </ion-card>
+      </ion-row>
+    </ion-grid>
+    
+      
+  </div>
+
+</ion-content>

@@ -1,0 +1,114 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title slot="start">Importar de SIAUU</ion-title>
+    <!--(ionInput)="handleInput($event)"     //para capturar letra por letra -->
+    <ion-buttons slot="end">
+      <ion-button  (click)="sendForm.ngSubmit.emit()">Generar</ion-button>
+      <ion-button  (click)="restart()">Borrar</ion-button>
+    </ion-buttons>
+  
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title size="large" slot="start">Importar de SIAUU</ion-title>
+      <ion-buttons slot="end">
+        <ion-button  (click)="sendForm.ngSubmit.emit()">Generar</ion-button>
+        <ion-button  (click)="restart()">Borrar</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+
+  
+    <div [style.visibility]="!isWaiting ? 'visible' : 'hidden'"> 
+      <form  [formGroup]="fg" (ngSubmit)="submit(fg.value)" #sendForm="ngForm" >
+        <ion-grid>
+          <ion-row>
+            <div id="container"  >
+              <!--  SGRACAD -->
+              <ion-card >
+                <ion-card-header>
+                  <ion-card-subtitle class="ion-text-center">
+                    Importacion de alumnos desde escolar/alumnos/graficas/reporte con avance academico
+                  </ion-card-subtitle>
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-item>
+                      <div class="wrapform" >
+                        <ion-item>
+                          <ion-checkbox labelPlacement="end" name="includeSGRACAD" formControlName="includeSGRACAD">Incluir en importación</ion-checkbox>
+                        </ion-item>
+                        <ion-item>
+                          <ion-input label="Semestres" labelPlacement="stacked" type="text" name="allSemesters" formControlName="allSemesters" required placeholder="Todos los semestres, separados por coma."></ion-input>
+                        </ion-item>
+                      </div>
+                  </ion-item>
+                </ion-card-content>
+              </ion-card>
+
+              <!--  CONSTANCIAS -->
+              <ion-card >
+                <ion-card-header>
+                  <ion-card-subtitle class="ion-text-center">
+                    Importacion de calificaciones desde las constancias
+                  </ion-card-subtitle>
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-item>
+                      <div class="wrapform" >
+                        <ion-item>
+                          <ion-checkbox labelPlacement="end" name="includeConstancia" formControlName="includeConstancia">Incluir en importación</ion-checkbox>
+                        </ion-item>
+                        <ion-item>
+                          <ion-input label="Excluir fechas de actualización" labelPlacement="stacked" type="text" name="fechasExculirConst" formControlName="fechasExculirConst" placeholder="Fechas formato aaaammdd separadas por comas"></ion-input>
+                        </ion-item>
+                      </div>
+                  </ion-item>
+                </ion-card-content>
+              </ion-card>
+            
+                <!--  FICHA -->
+                <ion-card >
+                  <ion-card-header>
+                    <ion-card-subtitle class="ion-text-center">
+                      Importacion de ciclos desde la ficha del estudiante
+                    </ion-card-subtitle>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <ion-item>
+                        <div class="wrapform" >
+                          <ion-item>
+                            <ion-checkbox labelPlacement="end" name="includeFicha" formControlName="includeFicha">Incluir en importación</ion-checkbox>
+                          </ion-item>
+                          <ion-item>
+                            <ion-input label="Excluir fechas de actualización" labelPlacement="stacked" type="text" name="fechasExculirFicha" formControlName="fechasExculirFicha" placeholder="Fechas formato aaaammdd separadas por comas"></ion-input>
+                          </ion-item>
+                        </div>
+                    </ion-item>
+                  </ion-card-content>
+                </ion-card>
+              
+            
+            
+            </div>
+            
+          
+          </ion-row>
+        </ion-grid>
+      </form>
+    </div>  
+    <div id="spinnercontainer" [style.visibility]="isWaiting ? 'visible' : 'hidden'">
+      <ion-spinner id="spinner" name="bubbles" ></ion-spinner>
+    </div>
+
+
+</ion-content>

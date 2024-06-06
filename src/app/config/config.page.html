@@ -1,0 +1,59 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+      <ion-title slot="start">Configuración</ion-title>
+    <!--(ionInput)="handleInput($event)"     //para capturar letra por letra -->
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title size="large" slot="start">Configuración</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <div id="container">
+    <ion-grid>
+      <ion-row>
+        <ion-card >
+          <ion-icon name="person-circle-outline" slot="start" ></ion-icon>
+          <ion-card-content>
+            <ion-item>
+              <form  [formGroup]="fg" (ngSubmit)="submit(fg.value)">
+            
+                <div class="wrapform" >
+                  <ion-item>
+                    <ion-input label="Semestre actual"   [readonly]="true" labelPlacement="stacked" type="text" name="actualSemester" formControlName="actualSemester" required placeholder="Semestre actual"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input label="Semestre anterior" labelPlacement="stacked" type="text" name="lastSemester" formControlName="lastSemester" required placeholder="Semestre anterior"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input label="Todos los semestres" labelPlacement="stacked" type="text" name="allSemesters" formControlName="allSemesters" required placeholder="Todos los semestres, separados por coma."></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input label="Registros a procesar" labelPlacement="stacked" type="text" name="importBatchSize" formControlName="importBatchSize" required placeholder="Tamaño del lote de registros a procesar a la vez"></ion-input>
+                  </ion-item>
+                
+                </div>
+                <div class="sign-btn">
+                    <ion-button type="submit" shape="round"  [disabled]="!fg.valid">Registrar</ion-button>
+                </div>
+              </form>
+            
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+</ion-content>

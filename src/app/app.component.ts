@@ -1,18 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { AuthserviceService } from './shared';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent {
-  public appPages = [
-    { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/spam', icon: 'warning' },
-  ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+export class AppComponent implements OnInit {
+  isAdmin: boolean = false;
+  auth: AuthserviceService = inject(AuthserviceService)
+  public appPages = [{ title: 'Salir', url: '/folder/exit', icon: 'exit' , visible: true}];
+  // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor() {}
+
+  ngOnInit(): void {
+    this.isAdmin = this.auth.getIsAdmin();
+    this.appPages =  [
+      { title: 'Estudiantes', url: '/students', icon: 'people', visible: true },
+      { title: 'Reportes', url: '/report', icon: 'bar-chart' , visible: true},
+      { title: 'Importar de SIIAU', url: '/importsiauu', icon: 'cloud-download' , visible: this.isAdmin},
+      { title: 'Usuarios', url: '/users', icon: 'people' , visible: this.isAdmin},
+      { title: 'Configuración', url: '/settings', icon: 'settings' , visible: this.isAdmin},
+      { title: 'Salir', url: '/login', icon: 'exit' , visible: true}
+    ];
+  }
+
 }

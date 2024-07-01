@@ -81,7 +81,8 @@ export class ImportsiauuPage implements OnInit {
     console.log(values);
     // this.form.controls['your form control name'].value
 
-
+    let arrProm:Array<Promise<any>> = []
+    this.isWaiting = true
     
     // sgracad
     if (values.includeSGRACAD) {
@@ -89,8 +90,10 @@ export class ImportsiauuPage implements OnInit {
       let sgracad:ISetting  = {
         allSemesters: values.allSemesters
       };
-      this.controlSpinner(1);
-      this.bdService.importSGRACAD(sgracad)
+      
+      arrProm.push(this.bdService.importSGRACAD(sgracad))
+      
+      /*
       .then(response=>{
         this.controlSpinner(-1);
         console.log(response);
@@ -100,13 +103,16 @@ export class ImportsiauuPage implements OnInit {
         this.controlSpinner(-1);
         this.presentAlert('Error al tratar de grabar.');
       });
+      */
     } 
     // constancia
     if (values.includeConstancia) {
       console.log('entro a includeConstancia');
       let fechasExculirConst = values.fechasExculirConst;
-      this.controlSpinner(1);
-      this.bdService.importConstancia(fechasExculirConst)
+      
+      arrProm.push(this.bdService.importConstancia(fechasExculirConst))
+      
+      /*
       .then(response=>{
         this.controlSpinner(-1);
         console.log(response);
@@ -116,24 +122,39 @@ export class ImportsiauuPage implements OnInit {
         this.controlSpinner(-1);
         this.presentAlert('Error al tratar de grabar.');
       });
+      */
     } 
     
     // ficha
     if (values.includeFicha) {
       console.log('entro a includeFicha');
       let fechasExculirFicha = values.fechasExculirFicha;
-      this.controlSpinner(1);
-      this.bdService.importFicha(fechasExculirFicha)
+      //this.controlSpinner(1);
+      arrProm.push(this.bdService.importFicha(fechasExculirFicha))
+      
+      /*
       .then(response=>{
         this.controlSpinner(-1);
         console.log(response);
+        this.presentAlert('Generación correcta de scripts , proceda con la importación del SIIAU desde la extensión de chrome. ');
         //todo: inform in the same widget or with a toast
       })
       .catch(err=>{
         this.controlSpinner(-1);
         this.presentAlert('Error al tratar de grabar.');
       });
+      */
     } 
+    
+    Promise.all(arrProm)
+    .then((response)=>{
+      this.isWaiting = false
+      this.presentAlert('Generación correcta de scripts , proceda con la importación del SIIAU desde la extensión de chrome. ');
+    })
+    .catch((err)=>{
+      this.isWaiting = false
+      this.presentAlert('Error al tratar de grabar.');
+    })
  
    }
   

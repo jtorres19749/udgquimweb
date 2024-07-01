@@ -20,7 +20,9 @@ log.txt
 # Ionic
 /.ionic
 /platforms
+/   android
 /plugins
+
 
 # Compiled output
 /dist

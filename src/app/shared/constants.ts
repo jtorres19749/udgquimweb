@@ -1,10 +1,10 @@
 import { IData, ITableData } from './interfaces'
 
-// const URL = "http://localhost:3000/api";
-// const URLRPT = "http://localhost:3000/api";
+const URL = "http://localhost:3000/api";
+const URLRPT = "http://localhost:3000/api";
 
-const URL = "https://udgquim.onrender.com/api";
-const URLRPT = "https://udgquim.onrender.com/api";
+// const URL = "https://udgquim.onrender.com/api";
+// const URLRPT = "https://udgquim.onrender.com/api";
 
 const StudentFields_General: Array<IData> = [
     {title: "Código" , field: "codigo"},
